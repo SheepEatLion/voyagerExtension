@@ -4,7 +4,11 @@
     "version": "1.0",
     "description": "창백한 푸른 점",
     "action": {
-      "default_popup": "voyager.html"
+      "default_popup": "voyager.html",
+      "default_icon": {
+        "16": "./universe16.png",
+        "48": "./universe48.png"
+      }
     },
     "permissions": [
         "storage"
