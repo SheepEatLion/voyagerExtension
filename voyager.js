@@ -1,17 +1,15 @@
+document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('fetchImageBtn').addEventListener('click', fetchImage);
+});
 
 function fetchImage() {
-    const apiUrl = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY'; // 나사 API 엔드포인트 URL, 데모 키 사용. 횟수제한 존재.
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const imgUrl = data.url;
-            displayImage(imgUrl);
-        })
-        .catch(error => {
-            console.error('Error fetching image:', error);
-        });
+    chrome.runtime.sendMessage({ action: 'fetchImage' }, response => {
+      if (response && response.img_url) {
+        displayImage(response.img_url);
+      } else {
+        console.error('Error fetching image');
+      }
+    });
 }
 
 function displayImage(imgUrl) {
