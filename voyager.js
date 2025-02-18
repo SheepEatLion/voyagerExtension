@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
-document.getElementById('fetchImageBtn').addEventListener('click', fetchImage);
+    fetchContent();
 });
 
-function fetchImage() {
-    chrome.runtime.sendMessage({ action: 'fetchImage' }, response => {
-      if (response && response.img_url) {
+function fetchContent() {
+    chrome.runtime.sendMessage({ action: 'fetchContent' }, response => {
+      if (response) {
         displayImage(response.img_url);
+        displayTitle(response.title);
+        displayExplanation(response.explanation);
       } else {
-        console.error('Error fetching image');
+        console.error('Error fetching content');
       }
     });
 }
@@ -15,4 +17,14 @@ function fetchImage() {
 function displayImage(imgUrl) {
     const imageContainer = document.getElementById('imageContainer');
     imageContainer.innerHTML = `<img src="${imgUrl}" alt="Fetched Image">`;
+}
+
+function displayTitle(title) {
+    const titleContainer = document.getElementById('title');
+    titleContainer.textContent = title; // textContext -> textContent
+}
+
+function displayExplanation(explanation) {
+    const explanationContainer = document.getElementById('explanation');
+    explanationContainer.textContent = explanation; // textContext -> textContent
 }
