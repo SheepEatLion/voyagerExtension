@@ -7,7 +7,7 @@ function fetchContent() {
       if (response) {
         displayImage(response.img_url);
         displayTitle(response.title);
-        displayExplanation(response.explanation);
+        //displayExplanation(response.explanation);
       } else {
         console.error('Error fetching content');
       }
